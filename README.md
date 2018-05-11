@@ -9,3 +9,7 @@ Parsing URIs for offering a better user experience, adding images, descriptions 
 - Ebay
 
 Protecting the control panel with a password.
+
+Refactorizing the controller, using two classes:
+- Parser.php: For the parsing jobs. It will have got more classes that extend from it, as AmazonParser
+- JSONDb.php: Abstract library for managing json databases in PHP. Do it thinking about reusability in future projects.
