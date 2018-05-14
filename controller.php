@@ -1,13 +1,16 @@
 <?php
+include 'classes/JSONDb.php';
 $db_path = 'db.json';
-$db = get_db();	
+$encryption_key = 'Abc1234.';
+$JSONDb = new JSONDb($db_path, $encryption_key);
+$db = $JSONDb->getDb();	
 
 //Add to db
 if (isset($_REQUEST['uri'])) {	
 	if (!isset($db[$_REQUEST['uri']])) {		
 		$db[$_REQUEST['uri']] = 0;
 	}	
-	save_db($db);
+	$JSONDb->saveDb($db);
 }
 //Mark as bought
 elseif (isset($_REQUEST['mark'])) {
@@ -16,26 +19,8 @@ elseif (isset($_REQUEST['mark'])) {
 	}		
 	if (isset($db[$_REQUEST['mark']])) {
 		$db[$_REQUEST['mark']] = $_REQUEST['val'];
-		save_db($db);
+		$JSONDb->saveDb($db);
 	}
-}
-
-
-function get_db() {
-	global $db_path;
-	if (!file_exists($db_path)) {
-		file_put_contents($db_path,'');
-	}
-	$return = json_decode(file_get_contents($db_path),true);	
-	if (!is_array($return)) {
-		return [];
-	}
-	return $return;
-}
-
-function save_db($db) {
-	global $db_path;
-	file_put_contents($db_path,json_encode($db));
 }
 
 function get_random($db) {
