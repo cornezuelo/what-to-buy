@@ -12,7 +12,7 @@ include 'controller.php';
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
 	<!-- DataTables -->
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">		
 	
     <title>What To Buy? - List</title>
   </head>
@@ -20,13 +20,22 @@ include 'controller.php';
 	  <div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>What To Buy? - List</h1>						
+				<h1>What To Buy? - List</h1>
+				<?php if (isset($alert)) { ?>
+				<div class="alert alert-<?php echo $alert_lvl; ?> alert-dismissible fade show" role="alert">
+				  <?php echo $alert; ?>
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<?php } ?>				
 				<table class="table table-striped" id="mainTable">
 				  <thead class="thead-dark">
 					<tr>
 					  <th scope="col">URI</th>
 					  <th scope="col">Bought?</th>
 					  <th scope="col">Change Status</th>            
+					  <th scope="col">Delete</th>            
 					</tr>
 				  </thead>
 				  <tbody>
@@ -35,6 +44,7 @@ include 'controller.php';
 					  <td><b><a href="<?php echo $uri; ?>" target="_blank"><?php echo $uri; ?></a></b></td>
 					  <td><?php if ($bought == 1) { echo '<span style="color:green">YES</span>'; } else { echo '<span style="color:red">NO</span>'; } ?></td>
 					  <td><a href="list.php?mark=<?php echo $uri; ?>&val=<?php if ($bought == 1) echo '0'; else echo '1';?>" class="btn btn-<?php if ($bought == 1) echo 'danger'; else echo 'success'; ?>">Change to <?php if ($bought == 1) echo ' not '; ?>bought</a></td>
+					  <td><a href="list.php?delete=<?php echo $uri; ?>" class="btn btn-danger">Delete</a></td>
 					</tr>
 					<?php } ?>
 				  </tbody>
