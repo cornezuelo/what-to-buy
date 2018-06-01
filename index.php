@@ -23,7 +23,7 @@ $random = get_random($db);
 					<div class="card-body">
 					  <h4 class="card-title" align="center"><a href="<?php echo $random; ?>" target="_blank"><?php echo $random; ?></a></h4>
 					  <p class="card-text">
-						  <?php echo parse($random); ?>
+						  <?php echo $random; ?>
 					  </p>					  
 					</div>
 				</div>				
