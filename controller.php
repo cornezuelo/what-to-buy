@@ -83,5 +83,6 @@ function get_random($db) {
 			$ar_not_bought[] = $uri;
 		}
 	}	
+	if (empty($ar_not_bought)) return '';
 	return $ar_not_bought[rand(0,(count($ar_not_bought)-1))];
 }
